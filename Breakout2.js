@@ -11,7 +11,7 @@ var BALLSIZE  = 11;   // ボールのピクセル数
 var ANGLE_MIN = 10;   // ボール角度最小値
 var PDL_EDGE  = 0.2;  // パドル両端(ボール角度変更エリア)の長さの割合
 
-var stage = [1,2];
+var stage = [];
 
 /*
  *  その他の関数
