@@ -1,4 +1,173 @@
-<div class="breakout" data-maxheight="650">
-   <iframe title="ブロック崩しゲーム" width="520" height="730" src="https://blog-imgs-142.fc2.com/m/o/c/mochi1999/Breakout.html"></iframe>
+<!DOCTYPE html>
+<!-- saved from url=(0059)https://blog-imgs-142.fc2.com/m/o/c/mochi1999/Breakout.html -->
+<html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+<title>ブロック崩しゲーム Modification by mochi</title>
+<script src="./ひめかべ ブロック崩しゲーム Modification by mochi_files/Breakout.js.ダウンロード"></script>
+<script>
+<!--
+/**************************************************************************/
+/*  ひめかべ 基本動作設定 (★:省略できる項目)                             */
+/**************************************************************************/
+
+conf = {
+   life:    8                     // 残機数
+  ,ball:    "https://blog-imgs-142.fc2.com/m/o/c/mochi1999/Breakout-ball.png"        // ボール画像
+  ,ballK:   "https://blog-imgs-142.fc2.com/m/o/c/mochi1999/Breakout-ballK.png"       // ボール画像(貫通時)
+  ,title:   "https://blog-imgs-142.fc2.com/m/o/c/mochi1999/Breakout-title.png"       // タイトル画像 ★
+  ,bonus:   ""                    // 全クリア後のボーナス画像 ★
+  ,next:    ""                    // 全クリア後のボーナスページ ★
+  ,margin:  0                     // パドルからブロックまでの余白
+  ,debug:   0                     // デバッグ(無敵)モード (0:OFF 1:ON)
+  ,block_size:  1                 // ブロックピクセルサイズ
+};
+
+/**************************************************************************/
+/*  ステージ設定 (１つ以上の設定が必要です)                               */
+/**************************************************************************/
+
+stage.push({                      // --- ステージ 1 ---
+   block:   "https://blog-imgs-142.fc2.com/m/o/c/mochi1999/Breakout-block.png"       // ブロック画像
+  ,bg:      "https://blog-imgs-142.fc2.com/m/o/c/mochi1999/Breakout-bg.png"          // 背景画像(複数指定可)
+  ,pdl:     "https://blog-imgs-142.fc2.com/m/o/c/mochi1999/Breakout-pdl.png"         // パドル画像
+  ,kantuu:  2                     // 貫通弾の発動判定幅 (0:貫通弾OFF)
+  ,speed:   4                     // ボールスピード(大きいほど速い)
+  ,ok:      10                    // クリア達成の残ブロック数または割合
+});
+
+
+// URLのパラメータを取得
+var urlParam = location.search.substring(1);
+ 
+// URLにパラメータが存在する場合
+if(urlParam) {
+  // 「&」が含まれている場合は「&」で分割
+  var param = urlParam.split('&');
+ 
+  // パラメータを格納する用の配列を用意
+  var paramArray = [];
+ 
+  // 用意した配列にパラメータを格納
+  for (i = 0; i < param.length; i++) {
+    var paramItem = param[i].split('=');
+    paramArray[paramItem[0]] = paramItem[1];
+  }
+  if (paramArray.life) {    // URLパラメータから残機数設定
+    conf.life = paramArray.life;
+  }
+  if (paramArray.title) {   // URLパラメータからタイトル画像設定
+    conf.title = paramArray.title;
+  }
+  if (paramArray.debug) {   // URLパラメータからデバッグモード設定
+    conf.debug = paramArray.debug;
+  }
+  if (paramArray.bonus) {   // URLパラメータからボーナス画像設定
+    conf.bonus = paramArray.bonus;
+  }
+  if (paramArray.block_size) {   // URLパラメータからブロックピクセルサイズ設定
+    conf.block_size = paramArray.block_size;
+  }
+  if (paramArray.block) {   // URLパラメータからブロック画像設定
+    stage[0].block = paramArray.block;
+  }
+  if (paramArray.bg) {   // URLパラメータから背景画像設定
+    stage[0].bg = paramArray.bg;
+  }
+  if (paramArray.speed) {
+    stage[0].speed = paramArray.speed;   // URLパラメータからボールスピード設定
+  }
+  if (paramArray.ok) {   // URLパラメータからクリア達成の残ブロック数設定
+    stage[0].ok = paramArray.ok;
+  }
+}
+
+
+
+/**************************************************************************/
+/*  ブロックマップ設定 (必要ない場合は省略できます)                       */
+/**************************************************************************/
+
+
+
+/***** ↑ ひめかべ 設定はここまでです ↑ **********************************/
+//-->
+</script>
+<style>
+<!--
+body {
+	color:#555555;
+	background:#FFFFFF;
+	font-size:14px;
+	text-align:center;
+}
+
+h1, #guide {
+	background:#EEEEEE;
+	border:1px solid #DDDDDD;
+	width:480px;
+	margin:16px auto;
+	padding:6px;
+}
+
+h1 {
+	font-size:16px;
+}
+
+#guide {
+	font-size:12px;
+	text-align:left;
+}
+
+#gamescreen {
+	background:#E4E8F0;
+	border:1px solid #B4B8C0;
+	display:inline-block;
+	position:relative;
+	overflow:hidden;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+
+#bootmsg {
+	color:#FFFFFF;
+	background:#586080;
+	text-align:left;
+	line-height:1.2;
+	width:480px;
+	height:560px;
+	margin:0;
+}
+
+#msg {
+	color:#3355FF;
+	font:bold 32px sans-serif;
+	text-shadow:-2px -2px 0 #FFF, -2px 2px 0 #FFF, 2px -2px 0 #FFF, 2px 2px 0 #FFF;
+}
+-->
+</style>
+</head>
+<body>
+<div id="gamescreen">
+<div id="gamebg" style="position: relative; width: 480px; height: 560px;"><img src="./ひめかべ ブロック崩しゲーム Modification by mochi_files/Breakout-bg.png" alt="" style="position:absolute; left:0; top:0">
+<img src="Breakout-block.png" alt="" style="position:absolute; left:0; top:0">
+<img src="Breakout-title.png" alt="" style="position:absolute; left:0; top:0">
 </div>
-<script async defer src="https://blog-imgs-142.fc2.com/m/o/c/mochi1999/Breakout-Responsive-min.js"></script>
+<canvas id="gamecanv" style="position:absolute; visibility:hidden; left:0; top:0"></canvas>
+<img id="ball" style="position:absolute; visibility:hidden; left:0; bottom:0" src="./ひめかべ ブロック崩しゲーム Modification by mochi_files/Breakout-ball.png" width="11" height="11">
+<img id="pdl" style="position:absolute; visibility:hidden; left:0; bottom:0" src="./ひめかべ ブロック崩しゲーム Modification by mochi_files/Breakout-ball.png">
+<span id="msg" style="position:absolute; visibility:hidden; white-space:nowrap; left:50%; bottom:50%">&nbsp;</span>
+</div>
+
+<pre id="guide">【遊び方】
+・ブロック崩しゲームです。
+・ゲーム画面をマウスクリック、またはタップするとボールを発射します。
+・マウスを左右に動かすか、ゲーム画面を左右にスライドするとパドルが移動します。
+・パドルの端でボールを打ち返すと、角度が変わります。
+・パドルの中心でボールを打ち返すと、貫通弾になります。
+・「S」キーを押すと、ボールが倍速／等速に切り替わります。
+
+※画面のタッチ操作は対応環境のみで有効です。
+</pre>
+
+
+
+</body></html>
