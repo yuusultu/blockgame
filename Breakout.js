@@ -583,11 +583,9 @@ function oncompl()
 		}
 	}
 	catch (ex) {
-		msg("生成に失敗しました:\n" + wk.block);
 		return;
 	}
 
-	msg("完了しました\n");
 
 	setTimeout(function() {
 		$("gamescreen").innerHTML = '\n\
@@ -624,8 +622,6 @@ window.onload = function()
 
 	$("gamescreen").innerHTML = '<pre id="bootmsg"></pre>';
 
-	msg("JSブロック崩し -ひめかべ-  Ver.1.00\n\n");
-	msg("画像を読み込んでいます... ");
 
 	cache.store(conf.ball);
 	cache.store(conf.ballK);
@@ -645,11 +641,9 @@ window.onload = function()
 	}
 
 	cache.onerror = function(list) {
-		msg("読み込みできません:\n" + list.join("\n"));
 	};
 
 	cache.oncompl = function() {
-		msg("完了しました\nブロックマップを生成しています... ");
 		setTimeout(oncompl, 1);
 	};
 
