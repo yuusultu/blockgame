@@ -27,8 +27,8 @@ conf = {
 /**************************************************************************/
 
 stage.push({                      // --- ステージ 1 ---
-   block:   "https://blog-imgs-142.fc2.com/m/o/c/mochi1999/Breakout-block.png"       // ブロック画像
-  ,bg:      "https://blog-imgs-142.fc2.com/m/o/c/mochi1999/Breakout-bg.png"          // 背景画像(複数指定可)
+   block:   "block-line.png"       // ブロック画像
+  ,bg:      "Breakout-bg.png"          // 背景画像(複数指定可)
   ,pdl:     "https://blog-imgs-142.fc2.com/m/o/c/mochi1999/Breakout-pdl.png"         // パドル画像
   ,kantuu:  2                     // 貫通弾の発動判定幅 (0:貫通弾OFF)
   ,speed:   4                     // ボールスピード(大きいほど速い)
@@ -148,8 +148,8 @@ h1 {
 <body>
 <div id="gamescreen">
 <div id="gamebg" style="position: relative; width: 480px; height: 560px;"><img src="./ひめかべ ブロック崩しゲーム Modification by mochi_files/Breakout-bg.png" alt="" style="position:absolute; left:0; top:0">
-<img src="Breakout-block.png" alt="" style="position:absolute; left:0; top:0">
-<img src="Breakout-title.png" alt="" style="position:absolute; left:0; top:0">
+<img src="block-line.png" alt="" style="position:absolute; left:0; top:0">
+<img src="Breakout-bg.png" alt="" style="position:absolute; left:0; top:0">
 </div>
 <canvas id="gamecanv" style="position:absolute; visibility:hidden; left:0; top:0"></canvas>
 <img id="ball" style="position:absolute; visibility:hidden; left:0; bottom:0" src="./ひめかべ ブロック崩しゲーム Modification by mochi_files/Breakout-ball.png" width="11" height="11">
